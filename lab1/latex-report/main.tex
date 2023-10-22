@@ -1,0 +1,82 @@
+\documentclass[a4paper,16pt]{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+
+\usepackage{euscript}
+\usepackage[utf8]{inputenc}
+\usepackage[english,ukrainian]{babel}
+\usepackage{mathtext}
+\usepackage{epigraph}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{amsmath, amsthm,amsfonts,amsmath,amssymb,amscd}
+\usepackage{mathrsfs}
+\usepackage{apacite}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+\usepackage{longtable,booktabs}
+\usepackage{stmaryrd}
+
+\graphicspath{{images/}}
+\DeclareGraphicsExtensions{.png,.jpg}
+
+% ************************************************************* %
+%  Визначення математичних оточень та роботи з формулами
+% ************************************************************* %
+
+\theoremstyle{plain}
+\newtheorem{theorem}{\indent Теорема}[chapter]
+\newtheorem{claim}{\indent Твердження}[chapter]
+\newtheorem{lemma}{\indent Лема}[chapter]	
+\newtheorem{corollary}{\indent Наслідок}[chapter]
+
+\theoremstyle{definition}
+\newtheorem{definition}{\indent Означення}[chapter]
+\newtheorem{algorithm}{\indent Алгоритм}[chapter]
+\newtheorem{problem}{\indent Задача}[chapter]
+\newtheorem{example}{\indent Приклад}[chapter]
+\theoremstyle{remark}
+\newtheorem*{remark}{\indent\textbf{Зауваження}}
+\renewenvironment{proof}{{\indent\bfseries Доведення.~}}{\qed}
+
+% змінюємо формат нумерації формул
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{equation}}
+
+% команди для заборони розриву формул у небажаному місці
+\binoppenalty=10000
+\relpenalty=10000
+
+
+% ************************************************************* %
+%  Ненумеровані розділи
+% ************************************************************* %
+
+% команда для створення ненумерованого розділу, який тим не менше показується в змісті
+\newcommand{\uchapter}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}} 
+
+\newcommand{\intro}{\uchapter{Вступ}}                   % для створення вступу використаємо команду \uchapter
+\newcommand{\conclusions}{\uchapter{Висновки}}          % для створення висновків використаємо команду \uchapter
+\newcommand{\shortings}{\uchapter{Перелік умовних позначень, скорочень і термінів}}
+                                                        % для створення переліку умовних позначень використаємо команду \shortings
+
+\newcommand{\chapconclude}[1]{\section*{Висновки до розділу #1} \addcontentsline{toc}{section}{Висновки до розділу #1}}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+%основний документ
+\begin{document}
+
+\input{chapters/title}
+\newpage
+
+\pagenumbering{gobble}
+\cleardoublepage
+\pagenumbering{arabic}
+
+\setcounter{page}{2} 
+
+\input{chapters/main_part}
+
+\end{document}
+
