@@ -7,9 +7,11 @@ import (
 	"github.com/sarulabs/di"
 	"go.opentelemetry.io/otel/sdk/trace"
 	"go.uber.org/zap"
+	"mrkm/internal/cli"
 	"mrkm/internal/config"
 	"mrkm/internal/constants"
 	"mrkm/internal/http"
+	"mrkm/internal/services"
 	"mrkm/pkg/pgsql"
 	"mrkm/pkg/tracing"
 	"sync"
@@ -63,6 +65,14 @@ func Build(ctx context.Context, wg *sync.WaitGroup) di.Container {
 				},
 				Close: func(obj interface{}) error {
 					return obj.(*http.Server).Shutdown(ctx)
+				},
+			},
+			{
+				Name: constants.CLIName,
+				Build: func(ctn di.Container) (interface{}, error) {
+					signService := ctn.Get(constants.SignServiceName).(*services.SignService)
+
+					return cli.NewManager(signService), nil
 				},
 			},
 			{

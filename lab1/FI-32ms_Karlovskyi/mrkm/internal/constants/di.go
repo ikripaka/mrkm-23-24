@@ -5,10 +5,12 @@ const (
 	LoggerName  = "Logger"
 	PgSQLName   = "PgSQL"
 	ServerName  = "Server"
+	CLIName     = "CLI"
 	TracingName = "TracingProvider"
 
-	SignServiceName = "SignService"
-	SignHandlerName = "SignHandler"
-	
+	SignServiceName   = "SignService"
+	VerifyServiceName = "VerifyService"
+	SignHandlerName   = "SignHandler"
+
 	UserRepositoryName = "UserRepository"
 )

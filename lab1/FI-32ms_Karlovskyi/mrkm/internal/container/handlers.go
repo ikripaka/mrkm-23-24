@@ -12,9 +12,9 @@ func BuildHandlers() []di.Def {
 		{
 			Name: constants.SignHandlerName,
 			Build: func(ctn di.Container) (interface{}, error) {
-				signService := ctn.Get(constants.SignServiceName).(*services.SignService)
+				verifyService := ctn.Get(constants.VerifyServiceName).(*services.VerifyService)
 
-				return handlers.NewSignHandler(signService), nil
+				return handlers.NewVerifyHandler(verifyService), nil
 			},
 		},
 	}

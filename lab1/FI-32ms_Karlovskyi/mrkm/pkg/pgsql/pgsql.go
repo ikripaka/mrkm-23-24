@@ -6,6 +6,7 @@ import (
 	"github.com/uptrace/opentelemetry-go-extra/otelgorm"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"time"
 )
 
@@ -22,7 +23,9 @@ func NewPgsqlConnection(config *Config) (*gorm.DB, error) {
 	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		config.Host, config.Port, config.User, config.Pass, config.Name)
 
-	conn, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	conn, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Warn),
+	})
 
 	if err != nil {
 		return nil, err

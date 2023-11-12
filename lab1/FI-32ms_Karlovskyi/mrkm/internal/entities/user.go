@@ -1,50 +1,41 @@
 package entities
 
 import (
+	"bytes"
 	"crypto/rsa"
 	"fmt"
 	"math/big"
-	"strconv"
-	"strings"
 )
 
 type User struct {
-	Login        string
-	PasswordHash string
+	Nickname string
 
-	Key *rsa.PrivateKey `gorm:"serializer:json"`
+	PublicKey []byte `json:"type:bytea"`
 }
 
-func (u *User) ToClientView() *UserClientView {
-	pub, priv := FormatKey(u.Key)
-
-	return &UserClientView{
-		Login:      u.Login,
-		PublicKey:  pub,
-		PrivateKey: priv,
-	}
-}
-
-func FormatKey(k *rsa.PrivateKey) (pub, priv string) {
-	priv = fmt.Sprintf("%v", k.D)
+func FormatKey(k *rsa.PrivateKey) (pub, priv []byte) {
+	priv = []byte(k.D.String())
 
 	for _, p := range k.Primes {
-		priv += fmt.Sprintf("_%v", p)
+		priv = append(priv, '_')
+		priv = append(priv, []byte(p.String())...)
 	}
 
-	return fmt.Sprintf("%v_%v", k.PublicKey.N, k.PublicKey.E), priv
+	pub = k.PublicKey.N.Bytes()
+
+	return pub, priv
 }
 
-func ParsePrivateKey(key string) (*rsa.PrivateKey, error) {
-	split := strings.Split(key, "_")
+func ParsePrivateKey(key []byte) (*rsa.PrivateKey, error) {
+	split := bytes.Split(key, []byte{'_'})
 	if len(split) != 3 {
 		return nil, fmt.Errorf("wrong key")
 	}
 
 	d, p1, p2 := new(big.Int), new(big.Int), new(big.Int)
-	d, _ = d.SetString(split[0], 10)
-	p1, _ = p1.SetString(split[1], 10)
-	p2, _ = p2.SetString(split[2], 10)
+	d, _ = d.SetString(string(split[0]), 10)
+	p1, _ = p1.SetString(string(split[1]), 10)
+	p2, _ = p2.SetString(string(split[2]), 10)
 
 	privateKey := &rsa.PrivateKey{
 		D:      d,
@@ -63,31 +54,12 @@ func ParsePrivateKey(key string) (*rsa.PrivateKey, error) {
 	return privateKey, nil
 }
 
-type UserClientView struct {
-	Login string `json:"login"`
-
-	PublicKey  string `json:"public_key"`
-	PrivateKey string `json:"private_key"`
-}
-
-func ParsePublicKey(key string) (*rsa.PublicKey, error) {
-	split := strings.Split(key, "_")
-	if len(split) != 2 {
-		return nil, fmt.Errorf("wrong key")
-	}
-
-	n, e := new(big.Int), 0
-	n, _ = n.SetString(split[0], 10)
-
-	var err error
-
-	e, err = strconv.Atoi(split[1])
-	if err != nil {
-		return nil, err
-	}
+func ParsePublicKey(key []byte) *rsa.PublicKey {
+	n, e := new(big.Int), 65537
+	n = n.SetBytes(key)
 
 	return &rsa.PublicKey{
 		N: n,
 		E: e,
-	}, nil
+	}
 }

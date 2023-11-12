@@ -1,11 +1,12 @@
 -- +goose Up
 -- +goose StatementBegin
 create table users (
-    login varchar(255) primary key,
-    password_hash varchar,
+    nickname varchar(255) primary key,
 
-    key json
+    public_key bytea
 );
+
+create index idx_users_public_key  on users using hash(public_key);
 -- +goose StatementEnd
 
 -- +goose Down

@@ -3,6 +3,7 @@ package http
 import (
 	"context"
 	"fmt"
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
@@ -55,6 +56,7 @@ func New(ctx context.Context, wg *sync.WaitGroup, cfg *Config, trace *trace.Trac
 	}
 
 	s.router.Use(tracing.Middleware(cfg.ServiceName))
+	s.router.Use(static.Serve("/", static.LocalFile("./web/build", false)))
 	s.router.GET("/docs/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	api := s.router.Group("")
 
