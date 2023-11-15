@@ -1,0 +1,35 @@
+%%% Ó äàíîìó ôàéë³ âèçíà÷àéòå âñ³ íåîáõ³äí³ âàì íîâ³ êîìàíäè TeX
+%%% àáî ðîá³òü ïåðåâèçíà÷åííÿ ³ñíóþ÷èõ, íàïðèêëàä...
+
+% Ïåðåâèçíà÷åííÿ ñèìâîëó ïîðîæíüî¿ ìíîæèíè òà çíàê³â "á³ëüøå-äîð³âíþº", "ìåíøå-äîð³âíþº" íà ïðèéíÿò³ ó íàñ
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+\let\geq\geqslant
+\let\leq\leqslant
+
+% Âèçíà÷åííÿ íîâèõ ìàòåìàòè÷íèõ êîìàíä
+\newcommand*{\binsp}[1]{\ensuremath \left\{0, 1\right\}^{#1}}       % {0, 1}^m
+\newcommand*{\xor}{\ensuremath \oplus}                              % \xor = (+)
+\newcommand*{\GF}[1]{\ensuremath \mathbb F_{#1}}                    % F_n
+\newcommand*{\GFgroup}[1]{\ensuremath \mathbb F^{*}_{#1}}           % F^*_n
+\newcommand*{\Zring}[1]{\ensuremath \mathbb Z_{#1}}                 % Z_n
+\newcommand*{\Zgroup}[1]{\ensuremath \mathbb Z^{*}_{#1}}            % Z^*_n
+\newcommand*{\Jset}[1]{\ensuremath \mathbb J_{#1}}                  % J_n
+\newcommand*{\Qset}[1]{\ensuremath \mathbb Q_{#1}}                  % Q_n
+\newcommand*{\PQset}[1]{\ensuremath \widetilde{\mathbb Q}_{#1}}     % Q~_n
+\newcommand*{\cyclic}[1]{\ensuremath \left\langle {#1} \right\rangle}                  % <g>
+\newcommand*{\Legendre}[2]{\ensuremath \left( \frac{#1}{#2} \right)}  % ñèìâîë Ëåæàíäðà/ßêîáè
+\newcommand*{\compinv}[1]{\ensuremath {#1}^{\left\langle -1 \right\rangle}}  % îáðàòíûé ïî êîìïîçèöèè
+
+% ²íøèé ñïîñ³á âèçíà÷åííÿ ìàòåìàòè÷íîãî îïåðàòîðó
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Li}{Li}
+\DeclareMathOperator{\Coef}{Coef}
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\Exp}{Exp}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\charact}{char}
+\DeclareMathOperator{\Sym}{Sym}
+
+%%% ...³ òàêå ³íøå
