@@ -1,0 +1,8 @@
+﻿  Lab 1 Geeksforgeeks.cpp
+C:\Users\Арсений\Desktop\Учеба 13 семестр\СТК что то там\Lab 1 Geeksforgeeks\Lab 1 Geeksforgeeks\Lab 1 Geeksforgeeks.cpp(201,23): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Арсений\Desktop\Учеба 13 семестр\СТК что то там\Lab 1 Geeksforgeeks\Lab 1 Geeksforgeeks\Lab 1 Geeksforgeeks.cpp(624,32): warning C4244: =: преобразование "_Rep" в "int", возможна потеря данных
+          with
+          [
+              _Rep=__int64
+          ]
+  Lab 1 Geeksforgeeks.vcxproj -> C:\Users\Арсений\Desktop\Учеба 13 семестр\СТК что то там\Lab 1 Geeksforgeeks\Debug\Lab 1 Geeksforgeeks.exe
