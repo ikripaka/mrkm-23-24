@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital Signature</title>
+</head>
+<body>
+    <h1>Generate and Verify Digital Signature</h1>
+
+    <form action="/sign" method="post">
+        <input type="text" name="message" placeholder="Enter your message">
+        <input type="submit" value="Create Signature">
+    </form>
+
+    <form action="/verify" method="post">
+        <input type="text" name="message" placeholder="Enter your message">
+        <input type="text" name="signature" placeholder="Enter signature">
+        <input type="submit" value="Verify Signature">
+    </form>
+</body>
+</html>
