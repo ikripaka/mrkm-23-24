@@ -1,15 +1,15 @@
 version: '3.0'
 services:
-  ecdsa-container:
-    build:
-      context: .
-      dockerfile: ecdsa.Dockerfile
-    command: ["tail", "-f", "/dev/null"]
-    volumes:
-      - ./data:/data
-      - "/etc/localtime:/etc/localtime:ro"
-    networks:
-      - network_services
+  # rsa-container:
+  #   build:
+  #     context: .
+  #     dockerfile: rsa.Dockerfile
+  #   command: ["tail", "-f", "/dev/null"]
+  #   volumes:
+  #     - ./data:/data
+  #     - "/etc/localtime:/etc/localtime:ro"
+  #   networks:
+  #     - network_services
 
   back-service:
     container_name: fast-api-back
@@ -21,10 +21,11 @@ services:
       - 8000:8000
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
+      - "./data:/fast-api/data"
     networks:
       - network_services
-    depends_on:
-      - ecdsa-container
+    # depends_on:
+    #   - rsa-container
 
 networks:
   network_services:
