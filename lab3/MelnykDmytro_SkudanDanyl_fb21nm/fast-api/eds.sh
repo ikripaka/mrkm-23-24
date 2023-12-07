@@ -11,7 +11,7 @@ generate_signature() {
 
 verify_signature() {
     echo "Verifying signature..."
-    openssl dgst -sha256 -verify public_key.pem -signature signature.txt data.txt
+    openssl dgst -sha256 -verify public_key.pem -signature $2 $3
     if [ $? -eq 0 ]; then
         echo "Signature is valid."
     else
