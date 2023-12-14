@@ -7,22 +7,20 @@ from Crypto.Hash import SHA256
 app = FastAPI()
 
 
-@app.get("/generate-signature")
+@app.post("/get_key")
 async def get_key(
     private_key: UploadFile = File(...),
     text_file: UploadFile = File(...),
 ):
+    print(private_key)
     if private_key is None:
         raise HTTPException(status_code=400, detail="Not found file")
     
     if text_file is None:
         raise HTTPException(status_code=400, detail="Not found file")
     
-    with open(private_key, "r") as f:
-        private_key = f.read()
-    
-    with open(text_file, "r") as f:
-        message = f.read().encode()
+    private_key = await private_key.read()
+    message = await text_file.read()
 
     private_key = RSA.import_key(private_key)
     message_hash = SHA256.new(message)
@@ -45,14 +43,9 @@ async def verify_signature(
     if public_key is None:
         raise HTTPException(status_code=400, detail="Not found file")
     
-    with open(message, "r") as f:
-        signature = f.read()
-    
-    with open(signature, "r") as f:
-        message = f.read().encode()
-
-    with open(public_key, "r") as f:
-        public_key = f.read()
+    signature = await signature.read()
+    message = await message.read()
+    public_key = await public_key.read()
     
     public_key = RSA.import_key(public_key)
     message_hash = SHA256.new(message)
