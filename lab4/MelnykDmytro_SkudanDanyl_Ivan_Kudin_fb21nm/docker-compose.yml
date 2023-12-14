@@ -1,0 +1,19 @@
+version: '3.0'
+services:
+  back-service:
+    container_name: fast-api-back
+    build: 
+      context: .
+      dockerfile: fast-api-back.Dockerfile
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "./data:/fast-api/data"
+    networks:
+      - network_services
+      
+networks:
+  network_services:
+    driver: bridge
