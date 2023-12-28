@@ -1,0 +1,21 @@
+server:
+  serviceName: Main Service
+  host: 0.0.0.0
+  port: 8000
+  readTimeout: 30s
+  writeTimeout: 30s
+
+database:
+  host: 0.0.0.0
+  port: 5432
+  name: mrkm
+  user: postgres
+  pass: 12345
+  connectionTimeout: 30s
+  compression: zlib
+  pingInterval: 30s
+  minConnections: 10
+  maxConnections: 20
+
+tracing:
+  host: http://localhost:14268/api/traces
