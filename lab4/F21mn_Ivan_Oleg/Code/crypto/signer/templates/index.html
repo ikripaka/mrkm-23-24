@@ -1,0 +1,29 @@
+<form value="SignForm" method="post" enctype="multipart/form-data"  method="post" action="signer/"> 
+{% csrf_token %}
+<table>
+<tr>
+<td>PFX:</td><td>{{sign_form.pfx_file}}</td> <td>PFX password:{{sign_form.password}}</td>
+</tr>
+<tr>
+<td>File to sign:</td><td>{{sign_form.user_file}}</td>
+</tr>
+<tr>
+<td><input type="submit" value="Sign" ></td>
+</tr>
+</table>
+</form>
+
+<form value="CheckForm" method="post" enctype="multipart/form-data"  method="post" action="checker/"> 
+{% csrf_token %}
+<table>
+<tr>
+<td>Signature:</td><td>{{check_form.p7s_file}}</td>
+</tr>
+<tr>
+<td>File to check:</td><td>{{check_form.user_file}}</td>
+</tr>
+<tr>
+<td> <input type="submit" value="Check" onclick="check()"> </td>
+</tr>
+</table>
+</form>
