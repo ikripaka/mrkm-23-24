@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signature Result</title>
+    <style>
+        #signature {
+            word-wrap: break-word; 
+            max-width: 600px; 
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            margin-bottom: 10px; 
+        }
+
+        .copy-button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Signature Result</h1>
+    <div id="signature">{{ signature }}</div>
+    <button class="copy-button" onclick="copySignature()">Copy Signature</button>
+    <a href="/">Return to Home</a>
+
+    <script>
+        function copySignature() {
+            var signature = document.getElementById('signature').innerText;
+            navigator.clipboard.writeText(signature).then(function() {
+                // alert('Signature copied to clipboard');
+            }, function(err) {
+                // alert('Error in copying text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
